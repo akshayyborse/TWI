@@ -11,9 +11,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import CartDrawer from "@/components/CartDrawer";
 import WishlistDrawer from "@/components/WishlistDrawer";
+import SearchOverlay from "@/components/SearchOverlay";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const navLinks = [
     { name: "SHOP", href: "/products" },
@@ -65,7 +67,11 @@ const Header = () => {
 
           {/* Right Actions */}
           <div className="flex items-center gap-4">
-            <button className="p-2 text-foreground/80 hover:text-primary transition-colors" aria-label="Search">
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="p-2 text-foreground/80 hover:text-primary transition-colors"
+              aria-label="Search"
+            >
               <Search size={20} />
             </button>
 
@@ -109,6 +115,8 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
       {/* Mobile Menu */}
       <div
